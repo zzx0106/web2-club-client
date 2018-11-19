@@ -1,0 +1,46 @@
+@import './reset.scss';
+@import './common.scss';
+@import './flex.scss';
+
+// 这里是头部头像的样式，因为这个是插件在全局生成的弹框，所以写在最外层
+.api {
+    .top-box {
+        @include display-flex();
+        @include justify-content(space-between);
+        @include align-items(center);
+        .top-box-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .top-box-level {
+            font-size: 14px;
+            font-weight: 500;
+            color: #421364;
+        }
+    }
+    .item {
+        font-size: 14px;
+        line-height: 30px;
+        &.item-dark:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+    }
+    .logout {
+        cursor: pointer;
+        color: #07c;
+    }
+}
+
+.nothing {
+    @include display-flex();
+    @include align-items(center);
+    @include justify-content(center);
+    @include flex-direction(column);
+    color: #b2bac2;
+    font-size: 14px;
+    min-height: 200px;
+    text-align: center;
+    .ivu-icon {
+        font-size: 55px;
+    }
+}

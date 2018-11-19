@@ -1,0 +1,56 @@
+// 公共样式存放处
+$base-width: 980px;
+.page-enter-active,
+.page-leave-active {
+    transition: opacity 0.15s;
+}
+.page-enter,
+.page-leave-active {
+    opacity: 0;
+}
+* {
+    font-family: 'Microsoft JhengHei';
+}
+.ivu-icon {
+    font-family: Ionicons;
+}
+
+// 公共body页的top头部
+.top {
+    margin: 24px 16px;
+}
+
+// 富文本编辑器代码块
+.editor-contener {
+    text-align: left;
+}
+.ql-container {
+    font-size: 14px;
+}
+.ql-snow .ql-tooltip {
+    z-index: 30;
+}
+#ql-editor h1 {
+    font-weight: 500;
+}
+#ql-editor h2 {
+    font-weight: 500;
+}
+#ql-editor h3 {
+    font-weight: 500;
+}
+#ql-editor pre {
+    font-family: Menlo, Monaco, Consolas, Courier New, monospace, monospace;
+    font-size: 14px;
+    span {
+        font-family: Menlo, Monaco, Consolas, Courier New, monospace, monospace;
+    }
+}
+body {
+    max-width: 1260px;
+    min-width: 600px;
+    margin: 0 auto !important;
+}
+html {
+    background: #F4F5F5;
+}

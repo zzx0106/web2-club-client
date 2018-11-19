@@ -1,0 +1,89 @@
+// https://segmentfault.com/a/1190000003978624
+@mixin display-flex() {
+    display: -webkit-box; /* 老版本语法: Safari, iOS, Android browser, older WebKit browsers. */
+    display: -moz-box; /* 老版本语法: Firefox (buggy) */
+    display: -ms-flexbox; /* 混合版本语法: IE 10 */
+    display: -webkit-flex; /* 新版本语法: Chrome 21+ */
+    display: flex; /* 新版本语法: Opera 12.1, Firefox 22+ */
+}
+
+@mixin flex-direction($direction) {
+    @if ($direction=row) {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+    }
+    @if ($direction=row-reverse) {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: reverse;
+    }
+    @if ($direction=column) {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+    }
+    @if ($direction=column-reverse) {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: reverse;
+    }
+    -webkit-flex-direction: $direction;
+    flex-direction: $direction;
+}
+
+@mixin flex-wrap($wrap) {
+    @if ($wrap=nowrap) {
+        -webkit-box-lines: single;
+    }
+    @if ($wrap=wrap) {
+        -webkit-box-lines: multiple;
+    }
+    -webkit-flex-wrap: $wrap;
+    flex-wrap: $wrap;
+}
+
+@mixin justify-content($justify-content) {
+    @if ($justify-content=flex-start) {
+        -webkit-box-pack: start;
+    }
+    @if ($justify-content=flex-end) {
+        -webkit-box-pack: end;
+    }
+    @if ($justify-content=center) {
+        -webkit-box-pack: center;
+    }
+    @if ($justify-content=space-between) {
+        -webkit-box-pack: justify;
+    }
+    -webkit-justify-content: $justify-content;
+    justify-content: $justify-content;
+}
+
+@mixin align-items($align-items) {
+    @if ($align-items=flex-start) {
+        -webkit-box-align: start;
+    }
+    @if ($align-items=flex-end) {
+        -webkit-box-align: end;
+    }
+    @if ($align-items=center) {
+        -webkit-box-align: center;
+    }
+    @if ($align-items=baseline) {
+        -webkit-box-align: baseline;
+    }
+    @if ($align-items=stretch) {
+        -webkit-box-align: stretch;
+    }
+    -webkit-align-items: $align-items;
+    align-items: $align-items;
+}
+
+@mixin order($order) {
+    -webkit-box-ordinal-group: $order;
+    -webkit-order: $order;
+    order: $order;
+}
+
+@mixin flex($flex) {
+    -webkit-box-flex: $flex;
+    -webkit-flex: $flex;
+    flex: $flex;
+}
