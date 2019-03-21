@@ -62,6 +62,7 @@ export default {
         ...mapMutations(['toFetchUserInfo']),
         goUserDetail(item) {
             console.log(item);
+            location.href = `/user/info/articles?name=${item.name}&searchUser=${item.name}`;
         },
         async deleteFollowAuthor({ _id = '' }) {
             if (_id) {

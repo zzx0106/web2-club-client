@@ -1,5 +1,5 @@
 const bodyParser = require('body-parser');
-const session = require('express-session');
+// const session = require('express-session');
 var webpack = require('webpack');
 
 module.exports = {
@@ -8,13 +8,8 @@ module.exports = {
      */
     head: {
         title: 'web2',
-        meta: [
-            { charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: '描述' },
-        ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-        link: [{ rel: 'stylesheet', href: '//at.alicdn.com/t/font_798445_uuga81pcau.css' }],
+        meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: '描述' }],
+        link: [{ rel: 'shortcut icon', href: '/favicon.ico' }, { rel: 'stylesheet', href: '//at.alicdn.com/t/font_798445_uuga81pcau.css' }],
     },
     router: {
         middleware: ['auth'],
@@ -81,26 +76,26 @@ module.exports = {
         },
     },
     /*
-    ** Add server middleware
-    ** Nuxt.js uses `connect` module as server
-    ** So most of express middleware works with nuxt.js server middleware
-    */
-    serverMiddleware: [
-        // 'redirect-ssl',
-        // body-parser middleware
-        bodyParser.json(),
-        // session middleware
-        session({
-            secret: 'super-secret-key',
-            resave: false,
-            saveUninitialized: false,
-            cookie: { maxAge: 60000 },
-        }),
-        // Api middleware
-        // We add /api/login & /api/logout routes
-        // { path: '/api', handler: '~/api/index.js' },
-        '~/api',
-    ],
+     ** Add server middleware
+     ** Nuxt.js uses `connect` module as server
+     ** So most of express middleware works with nuxt.js server middleware
+     */
+    // serverMiddleware: [
+    //     // 'redirect-ssl',
+    //     // body-parser middleware
+    //     bodyParser.json(),
+    //     // session middleware
+    //     session({
+    //         secret: 'super-secret-key',
+    //         resave: false,
+    //         saveUninitialized: false,
+    //         cookie: { maxAge: 60000 },
+    //     }),
+    //     // Api middleware
+    //     // We add /api/login & /api/logout routes
+    //     // { path: '/api', handler: '~/api/index.js' },
+    //     '~/api',
+    // ],
     axios: {
         proxy: true,
     },
@@ -116,11 +111,5 @@ module.exports = {
         { src: '~plugins/common.js' },
         { src: '~plugins/quill-editor.js', ssr: false },
     ],
-    css: [
-        { src: '~assets/css/index.scss', lang: 'scss' },
-        'quill/dist/quill.snow.css',
-        'quill/dist/quill.bubble.css',
-        'quill/dist/quill.core.css',
-        'highlight.js/styles/tomorrow-night.css',
-    ],
+    css: [{ src: '~assets/css/index.scss', lang: 'scss' }, 'quill/dist/quill.snow.css', 'quill/dist/quill.bubble.css', 'quill/dist/quill.core.css', 'highlight.js/styles/tomorrow-night.css'],
 };

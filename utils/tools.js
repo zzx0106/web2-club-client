@@ -165,6 +165,16 @@ const getCookie = (tk) => {
         }
     }
 };
+const clearCookie = (name) => {
+    var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+    if (keys) {
+        for (var i = keys.length; i--; ) {
+            document.cookie = keys[i] + '=0;path=/;expires=' + new Date(0).toUTCString(); //清除当前域名下的,例如：m.kevis.com
+            document.cookie = keys[i] + '=0;path=/;domain=' + document.domain + ';expires=' + new Date(0).toUTCString(); //清除当前域名下的，例如 .m.kevis.com
+            document.cookie = keys[i] + '=0;path=/;domain=kevis.com;expires=' + new Date(0).toUTCString(); //清除一级域名下的或指定的，例如 .kevis.com
+        }
+    }
+};
 // 将用户信息通过aes加密存储全局
 const setUserDataInGlobal = (data) => {
     let _data = {};
@@ -237,6 +247,7 @@ export {
     encryptionDatagram,
     decryptionDatagram,
     getCookie,
+    delCookie,
     setUserData,
     getUserData,
     getUserDataInGlobal,

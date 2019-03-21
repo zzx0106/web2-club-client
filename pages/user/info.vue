@@ -1,46 +1,82 @@
 <template>
     <div class="info-container">
         <header class="info-header">
-            <div @click="pageToGo('home')" class="info-header-left">
+            <div @click="pageToGo('home')"
+                 class="info-header-left">
                 logo
             </div>
             <div class="info-header-right">
-                <div @click="pageToGo('home')" class="ihr-item">首页</div>
-                <div @click="pageToGo('classify')" class="ihr-item">分类</div>
-                <div @click="pageToGo('other')" class="ihr-item">其他</div>
+                <div @click="pageToGo('home')"
+                     class="ihr-item">首页</div>
+                <div @click="pageToGo('classify')"
+                     class="ihr-item">分类</div>
+                <div @click="pageToGo('other')"
+                     class="ihr-item">其他</div>
             </div>
         </header>
         <div class="frame-container">
+            <div class="back-self"
+                 v-if="!isSelf"
+                 @click="backSelf()">回到主页</div>
             <div class="main-container">
                 <div class="top-container">
                     <div class="left-box">
-                        <img :src="userInfo.avatar" alt="">
+                        <img :src="userInfo.avatar"
+                             alt="">
                     </div>
                     <div class="center-box">
                         <h1 class="h1-nickname">{{userInfo.nickname}}</h1>
                         <h3><i class="iconfont icon-wxbdingwei" />工作地址：{{userInfo.job_address}}
-                            <span v-show="!updateInfoFlag[0]" @click="updateInfo(0)" class="touch-style">
+                            <span v-show="isSelf && !updateInfoFlag[0]"
+                                  @click="updateInfo(0)"
+                                  class="touch-style">
                                 <Icon type="md-create" />编辑
                             </span>
-                            <Input @on-search="submitUpdateInfo($event, 0)" v-show="updateInfoFlag[0]" style="width:180px;border-radius: 5px;height:20px;" search enter-button="确定" placeholder="输入工作地址" />
+                            <Input @on-search="submitUpdateInfo($event, 0)"
+                                   v-show="updateInfoFlag[0]"
+                                   style="width:180px;border-radius: 5px;height:20px;"
+                                   search
+                                   enter-button="确定"
+                                   placeholder="输入工作地址" />
                         </h3>
                         <h3><i class="iconfont icon-wxbzhanghu" />职位：{{userInfo.job}}
-                            <span v-show="!updateInfoFlag[1]" @click="updateInfo(1)" class="touch-style">
+                            <span v-show="isSelf && !updateInfoFlag[1]"
+                                  @click="updateInfo(1)"
+                                  class="touch-style">
                                 <Icon type="md-create" />编辑
                             </span>
-                            <Input @on-search="submitUpdateInfo($event, 1)" v-show="updateInfoFlag[1]" style="width:180px;border-radius: 5px;height:20px;" search enter-button="确定" placeholder="输入工作地址" />
+                            <Input @on-search="submitUpdateInfo($event, 1)"
+                                   v-show="updateInfoFlag[1]"
+                                   style="width:180px;border-radius: 5px;height:20px;"
+                                   search
+                                   enter-button="确定"
+                                   placeholder="输入工作地址" />
                         </h3>
                         <h3><i class="iconfont icon-link" />个人网站：{{userInfo.personal_web}}
-                            <span v-show="!updateInfoFlag[2]" @click="updateInfo(2)" class="touch-style">
+                            <span v-show="isSelf && !updateInfoFlag[2]"
+                                  @click="updateInfo(2)"
+                                  class="touch-style">
                                 <Icon type="md-create" />编辑
                             </span>
-                            <Input @on-search="submitUpdateInfo($event, 2)" v-show="updateInfoFlag[2]" style="width:180px;border-radius: 5px;height:20px;" search enter-button="确定" placeholder="输入工作地址" />
+                            <Input @on-search="submitUpdateInfo($event, 2)"
+                                   v-show="updateInfoFlag[2]"
+                                   style="width:180px;border-radius: 5px;height:20px;"
+                                   search
+                                   enter-button="确定"
+                                   placeholder="输入工作地址" />
                         </h3>
                         <h3><i class="iconfont icon-github" />GitHub：{{userInfo.github}}
-                            <span v-show="!updateInfoFlag[3]" @click="updateInfo(3)" class="touch-style">
+                            <span v-show="isSelf && !updateInfoFlag[3]"
+                                  @click="updateInfo(3)"
+                                  class="touch-style">
                                 <Icon type="md-create" />编辑
                             </span>
-                            <Input @on-search="submitUpdateInfo($event, 3)" v-show="updateInfoFlag[3]" style="width:180px;border-radius: 5px;height:20px;" search enter-button="确定" placeholder="输入GitHub地址" />
+                            <Input @on-search="submitUpdateInfo($event, 3)"
+                                   v-show="updateInfoFlag[3]"
+                                   style="width:180px;border-radius: 5px;height:20px;"
+                                   search
+                                   enter-button="确定"
+                                   placeholder="输入GitHub地址" />
                         </h3>
                     </div>
                     <div class="right-box"></div>
@@ -48,7 +84,9 @@
                 <div class="center-container">
                     <div class="content-box">
                         <div class="nav">
-                            <Menu mode="horizontal" :active-name="activeName" @on-select="changeNav">
+                            <Menu mode="horizontal"
+                                  :active-name="activeName"
+                                  @on-select="changeNav">
                                 <MenuItem name="articles">
                                 文章
                                 </MenuItem>
@@ -71,15 +109,18 @@
             </div>
             <div class="main2-container">
                 <div class="mc-top">
-                    <div @click="goType('following')" class="mct-title">
+                    <div @click="goType('following')"
+                         class="mct-title">
                         <div class="mct-item-title">关注</div>
                         <div class="mct-item-count">{{userInfo.following && userInfo.following.length}}</div>
                     </div>
-                    <div @click="goType('followers')" class="mct-title">
+                    <div @click="goType('followers')"
+                         class="mct-title">
                         <div class="mct-item-title">粉丝</div>
                         <div class="mct-item-count">{{userInfo.followers && userInfo.followers.length}}</div>
                     </div>
-                    <div @click="goType('collections')" class="mct-title">
+                    <div @click="goType('collections')"
+                         class="mct-title">
                         <div class="mct-item-title">收藏</div>
                         <div class="mct-item-count">{{userInfo.collect_topic_count}}</div>
                     </div>
@@ -100,9 +141,9 @@
 
 </template>
 <script>
-import { Message, Tabs, TabPane, Menu, MenuItem } from 'iview';
-import { mapMutations, mapState } from 'vuex';
-import { getUserDataInGlobal } from '@/utils/tools';
+import { Message, Tabs, TabPane, Menu, MenuItem } from "iview";
+import { mapMutations, mapState } from "vuex";
+import { getUserDataInGlobal } from "@/utils/tools";
 
 export default {
     data() {
@@ -111,6 +152,7 @@ export default {
             updateInfoFlag: [false, false, false, false],
             navData: {},
             navIndex: 0,
+            isSelf: true
         };
     },
     created() {},
@@ -119,12 +161,26 @@ export default {
         this.getUserInfo();
     },
     methods: {
+        backSelf() {
+            const userInfo = getUserDataInGlobal();
+            if (userInfo) {
+                // this.$router.push({
+                //     path: `/user/info/articles`,
+                //     query: {
+                //         name: userInfo.name
+                //     }
+                // });
+                // 这里用push不会刷新页面，所以用这个
+                window.location.href =
+                    "/user/info/articles?name=" + userInfo.name;
+            }
+        },
         goType(e) {
             this.$router.push({
                 path: `/user/info/${e}`,
                 query: {
-                    name: this.userInfo.name,
-                },
+                    name: this.userInfo.name
+                }
             });
         },
         pageToGo(type) {
@@ -133,22 +189,30 @@ export default {
         async getUserInfo() {
             const userInfo = getUserDataInGlobal();
             if (userInfo) {
+                if (this.$route.query.searchUser) {
+                    this.isSelf =
+                        this.$route.query.searchUser === userInfo.name;
+                    userInfo.name = this.$route.query.searchUser;
+                }
+                console.log("userinfo ----", userInfo.name);
                 const user = await this.$http.getUserByName(userInfo.name);
-                if (user.msg === 'ok') {
+                if (user.msg === "ok") {
                     this.userInfo = user.data;
                 } else {
                     // 查询失败就设置为缓存中的
                     this.userInfo = userInfo;
                 }
-                let avatarUrl = this.userInfo['avatar'];
-                if (avatarUrl.indexOf('size') !== -1)
-                    this.userInfo['avatar'] = avatarUrl.substring(0, avatarUrl.indexOf('size') + 5) + '90';
+                let avatarUrl = this.userInfo["avatar"];
+                if (avatarUrl.indexOf("size") !== -1)
+                    this.userInfo["avatar"] =
+                        avatarUrl.substring(0, avatarUrl.indexOf("size") + 5) +
+                        "90";
             } else {
-                this.$router.push('/user/login');
+                this.$router.push("/user/login");
             }
             this.navData = {
-                type: '0',
-                name: this.userInfo.name,
+                type: "0",
+                name: this.userInfo.name
             };
         },
         updateInfo(index) {
@@ -163,16 +227,16 @@ export default {
         infoHandle(e, index) {
             switch (index) {
                 case 0:
-                    this.userInfo['job_address'] = e;
+                    this.userInfo["job_address"] = e;
                     break;
                 case 1:
-                    this.userInfo['job'] = e;
+                    this.userInfo["job"] = e;
                     break;
                 case 2:
-                    this.userInfo['personal_web'] = e;
+                    this.userInfo["personal_web"] = e;
                     break;
                 case 3:
-                    this.userInfo['github'] = e;
+                    this.userInfo["github"] = e;
                     break;
             }
         },
@@ -180,22 +244,26 @@ export default {
         typeHandle(index) {
             switch (index) {
                 case 0:
-                    return 'job_address';
+                    return "job_address";
                 case 1:
-                    return 'job';
+                    return "job";
                 case 2:
-                    return 'personal_web';
+                    return "personal_web";
                 case 3:
-                    return 'github';
+                    return "github";
             }
         },
         async submitUpdateInfo(e, index) {
             console.log(e, index, this.typeHandle(index));
+            if (!e.trim()) {
+                this.$Message.warning("需要填写更新内容");
+                return;
+            }
             const result = await this.$http.update_person_info({
                 info_type: this.typeHandle(index),
-                info_data: e,
+                info_data: e
             });
-            console.log('result', result);
+            console.log("result", result);
             this.infoHandle(e, index);
             // 控制哪些显示哪些隐藏
             this.updateInfoFlag = this.updateInfoFlag.map((item, _index) => {
@@ -210,25 +278,26 @@ export default {
                 path: `/user/info/${e}`,
                 query: {
                     name: this.userInfo.name,
-                },
+                    searchUser: this.$route.query.searchUser
+                }
             });
-        },
+        }
     },
     watch: {
         // 动态监听changeUserInfo变化，并改变用户数据
         changeUserInfo() {
             this.getUserInfo();
-        },
+        }
     },
     computed: {
-        ...mapState(['changeUserInfo']),
+        ...mapState(["changeUserInfo"]),
         activeName() {
-            return this.$route.name.split('-')[2] || 'articles';
-        },
+            return this.$route.name.split("-")[2] || "articles";
+        }
     },
     components: {
-        Message,
-    },
+        Message
+    }
 };
 </script>
 <style lang="sass" scoped>
@@ -236,6 +305,16 @@ export default {
 .info-container {
     margin: 0 auto;
     background: #f4f5f5;
+    .back-self {
+        width: 23px;
+        height: 80px;
+        text-align: center;
+        background: #fff;
+        color: #2d8cf0;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        cursor: pointer;
+    }
     .info-header {
         @include display-flex();
         @include align-items(center);

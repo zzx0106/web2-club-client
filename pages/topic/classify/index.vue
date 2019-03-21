@@ -4,7 +4,7 @@
             <title class="home-title">分类</title>
         </div>
         <div class="sub-top">
-            <Input v-model="tabType" placeholder="请输入语言类型" search clearable style="width: 200px" />
+            <Input @on-change="searchChange" @on-search="searchType" v-model="tabType" placeholder="请输入语言类型" search style="width: 200px" />
             <Radio class="radio" :arr="radioArr" @radioType="radioChange"></Radio>
         </div>
         <div>
@@ -27,7 +27,9 @@ export default {
         return {
             radioArr: ['Popular', 'Name', 'Newest'],
             tabType: '',
+            isCopyed: false,// 是否备份过
             tabsList: [],
+            _tabsList: [] //备份
         };
     },
     async mounted() {
@@ -46,6 +48,27 @@ export default {
         }
     },
     methods: {
+        searchChange(type) {
+            if(!type.target.value.trim() && this.isCopyed) { // 还原
+                this.tabsList = this._tabsList;
+                this.isCopyed = false;
+            }
+        },
+        searchType(type) {
+            if(!type.trim()) {
+                this.$Message.warning('输入不能为空');
+                return;
+            }
+            if(this.isCopyed) {
+                this.tabsList = this._tabsList; // 还原
+            } else {
+                this._tabsList = this.tabsList; // 备份
+            }
+            this.isCopyed = true;
+            this.tabsList = this.tabsList.filter((item) => { // 筛选出对应type
+                return item.name.toLocaleLowerCase() === type.trim().toLocaleLowerCase();
+            })
+        },
         radioChange(type) {
             if (process.server) return false;
             if (type === 'Newest') {

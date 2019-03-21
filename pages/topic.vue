@@ -9,7 +9,7 @@
             <Sider ref="side1" :style="{position: 'fixed', height: '100vh', overflow: 'auto', zIndex: 10}" class="left-sider" width="165" hide-trigger collapsible v-model="isCollapsed2" breakpoint="sm" hide-trigger :default-collapsed="true" :collapsed-width="165">
                 <LeftSidebar :tabs="tabs" />
             </Sider>
-            <Layout>
+            <Layout style="height: 100vh;">
                 <Sider :style="{zIndex: -1}" @on-collapse="leftSiderChange" :class="{'hidden-left': showLeft}" class="left-sider" width="165" hide-trigger collapsible v-model="isCollapsed2" breakpoint="sm" hide-trigger :default-collapsed="true" :collapsed-width="165">
                 </Sider>
                 <Content class="center-content">

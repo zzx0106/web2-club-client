@@ -177,6 +177,15 @@ class Api {
     update_person_info(params) {
         return this.post(baseClientURL + '/user/update_person_info', params);
     }
+    get_qiniu_token() {
+        return this.get(baseClientURL + '/topic/get_qiniu_token');
+    }
+    search(params) {
+        return this.post(baseClientURL + '/search', params);
+    }
+    logout() {
+        return this.get(baseClientURL + '/user/logout');
+    }
     // setCookie(cookie) {
     //     this.setCookie(cookie);
     // }

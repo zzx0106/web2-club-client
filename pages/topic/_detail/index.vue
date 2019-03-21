@@ -5,13 +5,24 @@
         </div>
         <div class="sub-top">
             <div class="one">
-                <img class="left" :src="topicDataById.author && topicDataById.author.avatar" width="50" height="50" alt="">
+                <img class="left"
+                     :src="topicDataById.author && topicDataById.author.avatar"
+                     width="50"
+                     height="50"
+                     alt="">
                 <div class="right">
                     <div class="author-nickname">{{topicDataById.author && topicDataById.author.nickname}}
-                        <Button v-if="topicDataById.author_id === user.id" class="follower" size="small" type="primary">
+                        <Button v-if="topicDataById.author_id === user.id"
+                                class="follower"
+                                size="small"
+                                type="primary">
                             自己
                         </Button>
-                        <Button v-else @click="followAuthor(topicDataById.author_id, isFollowing)" class="follower" size="small" type="success">
+                        <Button v-else
+                                @click="followAuthor(topicDataById.author_id, isFollowing)"
+                                class="follower"
+                                size="small"
+                                type="success">
                             <span class="is-follow">{{isFollowing ? '已关注' : '关注'}}</span>
                             <span>{{topicDataById.author && topicDataById.author.followers.length}}</span>
                         </Button>
@@ -21,7 +32,8 @@
             </div>
             <div class="two">
                 <div class="left">
-                    <div v-show="!topicDataById.good" class="good">顶</div>
+                    <div v-show="!topicDataById.good"
+                         class="good">顶</div>
                     <!-- <div class="iconfont" :class="[topicDataById.is_collect? 'icon-like_fill' : 'icon-like']"></div> -->
                     <div class="icon-box">
                         <i class="iconfont icon-like"></i>{{topicDataById.collect_count || 0}}</div>
@@ -39,32 +51,53 @@
         </div>
         <div style="margin-top: 30px;margin-bottom: 50px;">
             <!-- 文本显示处 -->
-            <div class="quill-editor ql-container ql-snow" id="ql-editor">
-                <div class="ql-editor" ref="content" v-html="topicDataById.content"></div>
+            <div class="quill-editor ql-container ql-snow"
+                 id="ql-editor">
+                <div class="ql-editor"
+                     ref="content"
+                     v-html="topicDataById.content"></div>
             </div>
         </div>
         <div class="topic-ups">
 
-            <Tooltip :delay="1500" class="topic-ups-box" content="觉得文章不错？赞一个吧！" placement="top">
+            <Tooltip :delay="1500"
+                     class="topic-ups-box"
+                     content="觉得文章不错？赞一个吧！"
+                     placement="top">
                 <transition name="ups">
                     <span v-show="isTopicUpShow">+1</span>
                 </transition>
-                <Button class="topic-ups-icon-button" type="success" icon="md-thumbs-up" @click="topicUp">
+                <Button class="topic-ups-icon-button"
+                        type="success"
+                        icon="md-thumbs-up"
+                        @click="topicUp">
                     赞一个
                 </Button>
             </Tooltip>
-            <Tooltip class="topic-ups-box" :delay="1500" content="分享给好友或者谁" placement="top">
-                <Button class="topic-share-icon-button" type="info" icon="md-share">分享</Button>
+            <Tooltip class="topic-ups-box"
+                     :delay="1500"
+                     content="分享给好友或者谁"
+                     placement="top">
+                <Button class="topic-share-icon-button"
+                        type="info"
+                        icon="md-share">分享</Button>
             </Tooltip>
         </div>
         <div class="radio-box">
-            <Radio class="radio" :arr="radioArr" @radioType="radioChange"></Radio>
+            <Radio class="radio"
+                   :arr="radioArr"
+                   @radioType="radioChange"></Radio>
         </div>
-        <ul class="replies-box" v-if="(topicDataById.replies || []).length > 0">
-            <li class="replies-item" v-for="(item, index) in topicDataById.replies" :key="index">
+        <ul class="replies-box"
+            v-if="(topicDataById.replies || []).length > 0">
+            <li class="replies-item"
+                v-for="(item, index) in topicDataById.replies"
+                :key="index">
                 <div class="replies-item-content">
                     <div class="replies-left">
-                        <img class="replies-avatar" :src="item.author.avatar" alt="头像" />
+                        <img class="replies-avatar"
+                             :src="item.author.avatar"
+                             alt="头像" />
                         <div class="replies-level">{{item.author.level}}级大神</div>
                         <div class="replies-is-start">{{item.author.is_start}}</div>
                     </div>
@@ -75,8 +108,11 @@
                         </div>
                         <div class="replies-center">
                             <!-- 文本显示处 -->
-                            <div class="quill-editor ql-container ql-snow" id="ql-editor">
-                                <div class="ql-editor" ref="content" v-html="item.content"></div>
+                            <div class="quill-editor ql-container ql-snow"
+                                 id="ql-editor">
+                                <div class="ql-editor"
+                                     ref="content"
+                                     v-html="item.content"></div>
                             </div>
                         </div>
                         <div class="replies-bottom">
@@ -84,12 +120,17 @@
                         </div>
                     </div>
                     <div class="replies-ups-box">
-                        <div class="replies-ups" @click="upReplies(item)">
-                            <i v-if="isUpReplies(item)" class="icon-ups iconfont icon-appreciatefill" />
-                            <i v-else class="icon-ups iconfont icon-appreciate" />
+                        <div class="replies-ups"
+                             @click="upReplies(item)">
+                            <i v-if="isUpReplies(item)"
+                               class="icon-ups iconfont icon-appreciatefill" />
+                            <i v-else
+                               class="icon-ups iconfont icon-appreciate" />
                             <span>{{item.ups.length}}</span>
                         </div>
-                        <Icon @click="repliesSomeOne(item)" class="replies-icon" type="ios-return-left" />
+                        <Icon @click="repliesSomeOne(item)"
+                              class="replies-icon"
+                              type="ios-return-left" />
                     </div>
                 </div>
                 <div class="replies-time-line">
@@ -99,49 +140,74 @@
                 </div>
             </li>
         </ul>
-        <div class="replies-none" v-else>
-            <Icon class="replies-none-icon" type="md-chatboxes" />
+        <div class="replies-none"
+             v-else>
+            <Icon class="replies-none-icon"
+                  type="md-chatboxes" />
             <div class="replies-none-text">评论空空如也!</div>
         </div>
-        <QuillEditor id="editor" ref="editor" class="editor-box" @editorContent="editorContent($event)"></QuillEditor>
-        <Button class="btn-submit" type="primary" @click="submit(topicDataById.id)">回复</Button>
-        <div class="to-replie" @click="scrollToReplie">
+        <QuillEditor id="editor"
+                     ref="editor"
+                     class="editor-box"
+                     @editorContent="editorContent($event)"></QuillEditor>
+        <Button class="btn-submit"
+                type="primary"
+                @click="submit(topicDataById.id)">回复</Button>
+        <div class="to-replie"
+             @click="scrollToReplie">
             <Icon type="md-chatboxes" />
             <p>回复</p>
         </div>
-        <div class="to-save" :class="{'is-saved' : topicDataById.is_collect}" @click="toSave">
-            <i v-if="!topicDataById.is_collect" class="iconfont icon-like" />
-            <i v-else class="iconfont icon-like_fill" />
+        <div class="to-save"
+             :class="{'is-saved' : topicDataById.is_collect}"
+             @click="toSave">
+            <i v-if="!topicDataById.is_collect"
+               class="iconfont icon-like" />
+            <i v-else
+               class="iconfont icon-like_fill" />
             <p v-if="!topicDataById.is_collect"> 收藏</p>
             <p v-else> 已收藏</p>
         </div>
-        <BackTop :height="100" :bottom="105">
+        <BackTop :height="100"
+                 :bottom="105">
         </BackTop>
         <!-- <Footer>Footer</Footer> -->
     </div>
 </template>
 <script>
-import hljs from 'highlight.js';
+import hljs from "highlight.js";
 
-import { Affix, Message, Button, Icon, Submenu, MenuGroup, Anchor, AnchorLink } from 'iview';
-import LeftSidebar from '~/components/topic/LeftSidebar.vue';
-import RightSidebar from '~/components/topic/RightSidebar.vue';
-import Body from '~/components/topic/Body.vue';
-import sHeader from '~/components/topic/Header.vue';
+import {
+    Affix,
+    Message,
+    Button,
+    Icon,
+    Submenu,
+    MenuGroup,
+    Anchor,
+    AnchorLink
+} from "iview";
+import LeftSidebar from "~/components/topic/LeftSidebar.vue";
+import RightSidebar from "~/components/topic/RightSidebar.vue";
+import Body from "~/components/topic/Body.vue";
+import sHeader from "~/components/topic/Header.vue";
 // import Breadcrumb from '~/components/public/Breadcrumb.vue';
-import QuillEditor from '~/components/public/QuillEditor.vue';
-import Radio from '~/components/public/Radio.vue';
-import { getUserDataInGlobal, scrollTop } from '~/utils/tools.js';
+import QuillEditor from "~/components/public/QuillEditor.vue";
+import Radio from "~/components/public/Radio.vue";
+import { getUserDataInGlobal, scrollTop } from "~/utils/tools.js";
 export default {
     async asyncData({ req, store, route, redirect }) {
-        if (route.path === '/topic/') redirect({ path: '/topic/home' });
+        if (route.path === "/topic/") redirect({ path: "/topic/home" });
         const headers = req && req.headers;
         const isServer = process.server;
-        if (isServer && !!!headers.cookie) redirect({ path: '/user/login' });
+        if (isServer && !!!headers.cookie) redirect({ path: "/user/login" });
         try {
             const { detail } = route.params;
-            const topicDataById = await store.$http.getTopicByTopicId({ id: detail, headers });
-            if (topicDataById.msg !== 'ok') return { topicDataById: [] };
+            const topicDataById = await store.$http.getTopicByTopicId({
+                id: detail,
+                headers
+            });
+            if (topicDataById.msg !== "ok") return { topicDataById: [] };
             return { topicDataById: topicDataById.data };
         } catch (error) {
             console.log(error);
@@ -151,22 +217,22 @@ export default {
         return {
             BreadcrumbArr: [
                 {
-                    icon: 'ios-home-outline',
-                    name: '首页',
-                    href: 'javascript:void(0)',
+                    icon: "ios-home-outline",
+                    name: "首页",
+                    href: "javascript:void(0)"
                 },
                 {
-                    icon: 'logo-buffer',
-                    name: '详情',
-                    href: '',
-                },
+                    icon: "logo-buffer",
+                    name: "详情",
+                    href: ""
+                }
             ],
-            topicDataById: '',
-            content: '',
-            radioArr: ['Time', 'Hot'],
+            topicDataById: "",
+            content: "",
+            radioArr: ["Time", "Hot"],
             show: false,
             user: {}, // 缓存用户信息
-            isTopicUpShow: false, // topic点赞显示
+            isTopicUpShow: false // topic点赞显示
         };
     },
     mounted() {
@@ -177,40 +243,53 @@ export default {
             });
         }
         this.user = getUserDataInGlobal();
-        console.log('topicDataById', JSON.parse(JSON.stringify(this.topicDataById)));
+        console.log(
+            "topicDataById",
+            JSON.parse(JSON.stringify(this.topicDataById))
+        );
     },
     methods: {
         editorContent(html) {
-            console.log('html', html);
+            console.log("html", html);
             this.content = html;
         },
         async submit(tid) {
             try {
                 if (!this.content.trim()) {
-                    Message.error('输入不能为空');
+                    Message.error("输入不能为空");
                     return;
                 }
                 if (!!!tid) {
-                    Message.error('评论失败');
+                    Message.error("评论失败");
                     return;
                 }
 
-                const result = await this.$http.replie(tid, { content: this.content });
-                if (result.msg === 'ok') {
-                    const { avatar, is_star, level, name, nickname, id, create_at } = this.user;
+                const result = await this.$http.replie(tid, {
+                    content: this.content
+                });
+                if (result.msg === "ok") {
+                    const {
+                        avatar,
+                        is_star,
+                        level,
+                        name,
+                        nickname,
+                        id,
+                        create_at
+                    } = this.user;
                     let mySelf = {
                         author: {
                             avatar,
                             is_star,
                             level,
                             name,
-                            nickname,
+                            nickname
                         },
                         id,
                         reply_id: this.topicDataById.author_id,
                         content: this.content,
                         create_at: new Date(),
-                        ups: [],
+                        ups: []
                     };
                     // 提交后加入评论末尾
                     let old_replies = this.topicDataById.replies;
@@ -218,19 +297,19 @@ export default {
                     old_replies.push(mySelf);
                     this.topicDataById.replies = old_replies;
                     this.$refs.editor.cleanContent(); // 清除富文本框内容
-                    Message.success('回复成功');
+                    Message.success("回复成功");
                     return;
                 } else {
-                    Message.error('评论失败');
+                    Message.error("评论失败");
                     return;
                 }
             } catch (error) {
                 console.log(error);
-                Message.error('系统错误');
+                Message.error("系统错误");
             }
         },
         radioChange(type) {
-            if (type === 'Hot') {
+            if (type === "Hot") {
                 this.topicDataById.replies.sort((o, n) => {
                     return n.ups.length - o.ups.length;
                 });
@@ -241,25 +320,31 @@ export default {
             }
         },
         repliesSomeOne(item) {
-            let at = ` &nbsp;&nbsp;<em style="color: #08c;">@${item.author.nickname}</em><span> &nbsp;&nbsp;</span>`;
+            let at = ` &nbsp;&nbsp;<em style="color: #08c;">@${
+                item.author.nickname
+            }</em><span> &nbsp;&nbsp;</span>`;
             // this.$emit('at', at);
             this.$refs.editor.atController(at);
             // console.log(JSON.parse(JSON.stringify(item)));
         },
         scrollToReplie() {
-            const sTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const sTop =
+                document.documentElement.scrollTop || document.body.scrollTop;
             scrollTop(window, sTop, document.body.scrollHeight, 1000);
         },
         async toSave() {
             try {
                 let result = null;
                 const { is_collect, id } = this.topicDataById;
-                console.log('is_collect', { topic_id: id });
-                if (!is_collect) result = await this.$http.add_collect({ topic_id: id });
-                if (is_collect) result = await this.$http.remove_collect({ topic_id: id });
-                if (result.msg === 'ok') {
-                    if (result.data.type === 'ok') {
-                        this.topicDataById.is_collect = !this.topicDataById.is_collect;
+                console.log("is_collect", { topic_id: id });
+                if (!is_collect)
+                    result = await this.$http.add_collect({ topic_id: id });
+                if (is_collect)
+                    result = await this.$http.remove_collect({ topic_id: id });
+                if (result.msg === "ok") {
+                    if (result.data.type === "ok") {
+                        this.topicDataById.is_collect = !this.topicDataById
+                            .is_collect;
                         Message.success(result.data.rspinf);
                     } else {
                         Message.error(result.data.rspinf);
@@ -275,11 +360,11 @@ export default {
         async upReplies(item) {
             try {
                 if (item.id === this.user.id) {
-                    Message.success('嗯哼？不能自己赞自己哦');
+                    Message.success("嗯哼？不能自己赞自己哦");
                     return;
                 }
                 const result = await this.$http.upReplies(item.id);
-                if (result.msg === 'ok') {
+                if (result.msg === "ok") {
                     if (result.data.type === 0) {
                         item.ups.push(this.user.id);
                         Message.success(result.data.rspinf);
@@ -290,7 +375,7 @@ export default {
                         Message.error(result.data.rspinf);
                     }
                 } else {
-                    Message.error('点赞失败');
+                    Message.error("点赞失败");
                 }
             } catch (error) {
                 console.error(error);
@@ -304,20 +389,20 @@ export default {
         async topicUp() {
             try {
                 if (
-                    this.topicDataById.ups.some((item) => {
+                    this.topicDataById.ups.some(item => {
                         return item.id === this.user.id;
                     })
                 ) {
-                    Message.error('您已经点过赞了哦');
+                    Message.error("您已经点过赞了哦");
                     return;
                 }
                 const result = await this.$http.upTopic(this.topicDataById.id);
-                if (result.msg === 'ok') {
+                if (result.msg === "ok") {
                     if (result.data.type !== 2) {
                         this.topicDataById.ups.push({
                             id: this.user.id,
                             nickname: this.user.nickname,
-                            avatar: this.user.avatar,
+                            avatar: this.user.avatar
                         });
                         this.isTopicUpShow = true;
                         setTimeout(() => {
@@ -340,29 +425,36 @@ export default {
             if (id) {
                 try {
                     if (isFollowing) {
-                        const result = await this.$http.deleteFollowers({ author_id: id });
+                        const result = await this.$http.deleteFollowers({
+                            author_id: id
+                        });
                         console.log(result, this.user);
-                        if (result.msg === 'ok') {
+                        if (result.msg === "ok") {
                             if (result.data.type === 0) {
                                 this.topicDataById.author.followers = this.topicDataById.author.followers.filter(
-                                    (item) => item._id !== this.user.id
+                                    item => item._id !== this.user.id
                                 );
-                                console.log('this.topicDataById.author.followers', this.topicDataById.author.followers)
+                                console.log(
+                                    "this.topicDataById.author.followers",
+                                    this.topicDataById.author.followers
+                                );
                                 Message.success(result.data.rspinf);
                             } else {
                                 Message.error(result.data.rspinf);
                             }
                         }
                     } else {
-                        const result = await this.$http.addFollowers({ author_id: id });
+                        const result = await this.$http.addFollowers({
+                            author_id: id
+                        });
                         console.log(result, this.user);
-                        if (result.msg === 'ok') {
+                        if (result.msg === "ok") {
                             if (result.data.type === 0) {
                                 this.topicDataById.author.followers.push({
                                     name: this.user.name,
                                     nickname: this.user.nickname,
                                     avatar: this.user.avatar,
-                                    _id: this.user._id,
+                                    _id: this.user._id
                                 });
                                 Message.success(result.data.rspinf);
                             } else {
@@ -372,10 +464,10 @@ export default {
                     }
                 } catch (error) {
                     console.error(error);
-                    Message.error('操作失败');
+                    Message.error("操作失败");
                 }
             }
-        },
+        }
     },
     computed: {
         isFollowing() {
@@ -383,20 +475,20 @@ export default {
             // 该作者是否已被你关注
             if (this.topicDataById) {
                 const { _id } = this.user;
-                return this.topicDataById.author.followers.some((item) => {
+                return this.topicDataById.author.followers.some(item => {
                     return item._id === _id;
                 });
             }
-        },
+        }
     },
     components: {
         QuillEditor,
         Button,
         Radio,
         Anchor,
-        AnchorLink,
+        AnchorLink
         // Breadcrumb,
-    },
+    }
 };
 </script>
 
@@ -638,6 +730,7 @@ export default {
                                 .ql-editor {
                                     padding: 0;
                                     min-height: 60px;
+                                    overflow: hidden;
                                 }
                             }
                         }

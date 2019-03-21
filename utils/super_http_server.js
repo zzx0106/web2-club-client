@@ -56,15 +56,16 @@ class SuperHttp extends Api {
                     return data.data;
                 },
                 (error) => {
-                    if (error && error.response.status) {
-                        switch (error.response.status) {
-                            case 401:
-                                error.message = '未授权，请登录';
-                                break;
-                            default:
-                                error.message = '请求失败';
-                        }
-                    }
+                    console.log('响应拦截', error);
+                    // if (error && error.response.status) {
+                    //     switch (error.response.status) {
+                    //         case 401:
+                    //             error.message = '未授权，请登录';
+                    //             break;
+                    //         default:
+                    //             error.message = '请求失败';
+                    //     }
+                    // }
                     return Promise.reject(error);
                 }
             );

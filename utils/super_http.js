@@ -63,17 +63,18 @@ class SuperHttp extends Api {
                     return data.data;
                 },
                 (error) => {
-                    if (error && error.response.status) {
-                        switch (error.response.status) {
-                            case 401:
-                                error.message = '未授权，请登录';
-                                /* 跳转登录页 */
-                                window.location.replace(location.origin + '/user/login')
-                                break;
-                            default:
-                                error.message = '请求失败';
-                        }
-                    }
+                    console.log('client 响应err', error);
+                    // if (error && error.response.status) {
+                    //     switch (error.response.status) {
+                    //         case 401:
+                    //             error.message = '未授权，请登录';
+                    //             /* 跳转登录页 */
+                    //             window.location.replace(location.origin + '/user/login')
+                    //             break;
+                    //         default:
+                    //             error.message = '请求失败';
+                    //     }
+                    // }
                     Message.error({
                         content: error.message || '请求失败',
                         duration: 3,

@@ -5,7 +5,7 @@
                 <div class="tags">
                     <div class="tag">
                         <div class="tag-top">
-                            <span>{{item.ups.length}}</span>
+                            <span>{{(item.ups || []).length}}</span>
                         </div>
                         <div class="tag-bottom">
                             <span>ups</span>
@@ -44,9 +44,9 @@
                             <div class="create-at">
                                 <span>create at : {{item.create_at | timeFormat}}</span>
                             </div>
-                            <nuxt-link class="create-user" to="aaa/">{{item.author.nickname}}
+                            <nuxt-link class="create-user" to="aaa/">{{item.author && item.author.nickname}}
                             </nuxt-link>
-                            <div class="create-user-level">{{item.author.level}}</div>
+                            <div class="create-user-level">{{item.author && item.author.level}}</div>
                         </div>
                     </div>
                 </div>

@@ -8,9 +8,9 @@ $base-width: 980px;
 .page-leave-active {
     opacity: 0;
 }
-* {
-    font-family: 'Microsoft JhengHei';
-}
+// * {
+//     font-family: 'Microsoft JhengHei';
+// }
 .ivu-icon {
     font-family: Ionicons;
 }
@@ -48,9 +48,30 @@ $base-width: 980px;
 }
 body {
     max-width: 1260px;
-    min-width: 600px;
+    min-width: 383px;
     margin: 0 auto !important;
 }
 html {
-    background: #F4F5F5;
+    background: #f4f5f5;
+}
+
+::-webkit-scrollbar-track-piece {
+    //滚动条凹槽的颜色，还可以设置边框属性
+    background-color: #f8f8f8;
+}
+::-webkit-scrollbar {
+    //滚动条的宽度
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-thumb {
+    //滚动条的设置
+    background-color: #dddddd;
+    background-clip: padding-box;
+    min-height: 28px;
+    
+    border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #bbb;
 }

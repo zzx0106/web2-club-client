@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import SuperHttp from '../utils/super_http_server';
 import state from './state';
 import mutations from './mutation';
+import actions from './action';
 import { globalMethod } from '../utils/tools';
 Vue.use(Vuex);
 globalMethod(); // 加载全局方法
@@ -11,6 +12,7 @@ const createStore = () => {
         strict: process.env.NODE_ENV !== 'production',
         state,
         mutations,
+        actions,
     });
     store.$http = new SuperHttp(true, true);
     return store;

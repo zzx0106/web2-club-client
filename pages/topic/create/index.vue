@@ -56,7 +56,6 @@ export default {
     // },
     data() {
         return {
-            tabs: '',
             showModal: false,
             loading: true,
             tab: '', // 输入的tab
@@ -69,7 +68,6 @@ export default {
     async mounted() {
         try {
             let tabs = await this.$http.allTabs();
-            console.log('tabs', tabs);
             if (tabs.msg !== 'ok') {
                 Message.error(tabs.rspinf);
                 return;
@@ -140,11 +138,6 @@ export default {
                     Message.error('输入内容过少，或为空');
                     return;
                 }
-                console.log({
-                    title: this.title,
-                    tab: this.tabs,
-                    content: this.content,
-                });
                 const reslut = await this.$http.createTopic({
                     title: this.title,
                     tab: this.tabs,

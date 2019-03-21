@@ -6,5 +6,8 @@ const mutations = {
     toFetchUserInfo(state) {
         state.changeUserInfo = !state.changeUserInfo;
     },
+    MUTATION_setSearchInfo(state, searchData) {
+        state.STATE_searchData = searchData;
+    },
 };
 export default mutations;
